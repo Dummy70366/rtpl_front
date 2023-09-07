@@ -13,7 +13,7 @@ import { RegisterValidationSchema } from "@/validations/auth/RegisterValidation"
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { GetRolesListData } from "@/services/RoleService";
+import { GetRolesListData } from "@/services/roleService";
 
 const Register = () => {
   const navigate = useNavigate();
