@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import AddUpdateDepartment from "./AddUpdateDepartment";
 import { setDepartmentData } from "@/redux/slices/departmentSlide";
 import { useNavigate } from "react-router-dom";
+import { FormatDate } from "@/helpers/Utils";
 
 const DepartmentList = () => {
   const [limit, setLimit] = useState<number>(10);
@@ -117,6 +118,9 @@ const DepartmentList = () => {
       name: "createdAt",
       className: "",
       commonClass: "",
+      cell: (props: any) => {
+        return FormatDate(props.createdAt);
+      },
     },
     // {
     //   header: "Action",

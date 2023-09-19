@@ -15,6 +15,7 @@ import StaffVisitorList from "@/pages/admin/Visitor/StaffVisitorList";
 import DepartmentList from "@/pages/admin/Department/DepartmentList";
 import StaffVisitorDetails from "@/pages/admin/Visitor/StaffVisitorDetails";
 import DesignationList from "@/pages/admin/Designation/DesignationList";
+import AdminMyAccount from "@/pages/admin/myAccount/AdminMyAccount";
 
 export const AuthRoutes = [
   {
@@ -99,6 +100,11 @@ export const RoutesPath = [
     path: "admin/visitor/details/:token",
     name: "Visitor Details",
     element: StaffVisitorDetails,
+  },
+  {
+    path: "admin/account",
+    name: "My Account",
+    element: AdminMyAccount,
   },
 ];
 

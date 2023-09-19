@@ -1,18 +1,23 @@
 import Modal from "@/components/modal/Modal";
-import { DeleteIcon, EditIocn,LeftArrowIcon } from "@/components/svgIcons";
+import { DeleteIcon, EditIocn, LeftArrowIcon } from "@/components/svgIcons";
 import Table from "@/components/table/Table";
 import {
   currentPageCount,
   currentPageSelector,
 } from "@/redux/slices/paginationSlice";
-import { GetAllOfficesById,DeletOffice,EditOfficeData } from "@/services/companyService";
+import {
+  GetAllOfficesById,
+  DeletOffice,
+  EditOfficeData,
+} from "@/services/companyService";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import AddUpdateCompany from "../Company/AddUpdateCompany";
 import AddUpdateOffice from "./AddUpdateOffice";
 import { setCompanyData } from "@/redux/slices/companySlice";
-import { useParams } from 'react-router';
+import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
+import { FormatDate } from "@/helpers/Utils";
 
 const OfficeList = () => {
   const { id } = useParams();
@@ -24,7 +29,7 @@ const OfficeList = () => {
   const [loader, setLoader] = useState<boolean>(true);
   const [sort, setSorting] = useState<string>("");
   const [sortType, setSortingType] = useState<boolean>(true);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [officeDataPage, setOfficeDataPage] = useState<{
     data: any;
@@ -36,8 +41,7 @@ const OfficeList = () => {
     totalCount: 0,
   });
   const [officeId, setOfficeId] = useState<string>("");
-  const queryString =
-  `?limit=${limit}&page=${currentPage}&sort=${
+  const queryString = `?limit=${limit}&page=${currentPage}&sort=${
     sortType ? "asc" : "desc"
   }&sortBy=${sort}`;
   useEffect(() => {
@@ -46,15 +50,14 @@ const OfficeList = () => {
   }, []);
 
   useEffect(() => {
-    if(id)
-    console.log(id);
-    fetchAllOffice(id,queryString);
+    if (id) console.log(id);
+    fetchAllOffice(id, queryString);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, limit,  sort, sortType]);
+  }, [currentPage, limit, sort, sortType]);
 
-  async function fetchAllOffice(id:any,query: string) {
+  async function fetchAllOffice(id: any, query: string) {
     setLoader(true);
-    const response = await GetAllOfficesById(id,query);
+    const response = await GetAllOfficesById(id, query);
     if (response?.data?.responseData) {
       const result = response?.data?.responseData;
       setOfficeDataPage({
@@ -67,31 +70,24 @@ const OfficeList = () => {
     setLoader(false);
   }
 
-
-  const toggleButtonChange  = ( event :any, companyID:any)=>{
-    if(event.target.checked)
-    {
-      statusChange(companyID,true);
+  const toggleButtonChange = (event: any, companyID: any) => {
+    if (event.target.checked) {
+      statusChange(companyID, true);
+    } else {
+      statusChange(companyID, false);
     }
-    else
-    {
-      statusChange(companyID,false);
-    }
-  }
+  };
 
-
-  const statusChange = async (companyID:any,status:any) =>{
+  const statusChange = async (companyID: any, status: any) => {
     try {
-      let data ={
-        isActive:status
-      }
-      await EditOfficeData(data,companyID);
-
+      let data = {
+        isActive: status,
+      };
+      await EditOfficeData(data, companyID);
     } catch (error) {
       console.log("error", error);
     }
-    
-  }
+  };
 
   const handleOpenModal = (id: string) => {
     setOfficeId(id);
@@ -102,9 +98,9 @@ const OfficeList = () => {
     try {
       const response = await DeletOffice(Number(id));
       if (response?.data?.response_type === "SUCCESS") {
-        await fetchAllOffice(id,queryString);
+        await fetchAllOffice(id, queryString);
       }
-      
+
       setOpen(false);
     } catch (error) {
       console.log("error", error);
@@ -126,32 +122,37 @@ const OfficeList = () => {
       name: "createdAt",
       className: "",
       commonClass: "",
+      cell: (props: any) => {
+        return FormatDate(props.createdAt);
+      },
     },
     {
       header: "isActive",
       name: "isActive",
       className: "",
       commonClass: "",
-      cell: (props: { companyID: string; isActive: boolean;}) => {
+      cell: (props: { companyID: string; isActive: boolean }) => {
         return (
           <div className="flex items-center gap-1.5">
-            
-              
             <label className="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" defaultChecked={props.isActive} readOnly onChange={(e)=>{toggleButtonChange(e,props.companyID)}} className="sr-only peer"/>
+              <input
+                type="checkbox"
+                defaultChecked={props.isActive}
+                readOnly
+                onChange={(e) => {
+                  toggleButtonChange(e, props.companyID);
+                }}
+                className="sr-only peer"
+              />
               <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
             </label>
-            
-            
-            
           </div>
         );
       },
-
     },
     {
       header: "Action",
-      cell: (props: { companyID: string;}) => {
+      cell: (props: { companyID: string }) => {
         return (
           <div className="flex items-center gap-1.5">
             <span
@@ -166,65 +167,63 @@ const OfficeList = () => {
     },
   ];
 
-
   return (
     <>
-
-      <button type="button" className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-       onClick={() =>navigate('/admin/company')}
+      <button
+        type="button"
+        className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+        onClick={() => navigate("/admin/company")}
       >
-      <LeftArrowIcon className="w-ful h-full pointer-events-none" />
-      
+        <LeftArrowIcon className="w-ful h-full pointer-events-none" />
       </button>
 
-    <Table
-      headerData={columnData}
-      bodyData={officeDataPage.data}
-      isButton={true}
-      buttonText="Add Office"
-      buttonClick={() => {
-        setOfficeId("");
-        setOpenModal(true);
-      }}
-      loader={loader}
-      pagination={true}
-      dataPerPage={limit}
-      setLimit={setLimit}
-      currentPage={currentPage}
-      totalPage={officeDataPage.totalPage}
-      setSorting={setSorting}
-      sortType={sortType}
-      setSortingType={setSortingType}
-    />
-    {open && (
-      <Modal
-        variant={"Confirmation"}
-        closeModal={() => setOpen(!open)}
-        width="max-w-[475px]"
-        icon={<DeleteIcon className="w-full h-full mx-auto" />}
-        okbtnText="Yes"
-        cancelbtnText="No"
-        onClickHandler={() => officeDelete(officeId)}
-        confirmationText="Are you sure you want to delete this Company?"
-        title="Delete"
-      >
-        <div className=""></div>
-      </Modal>
-    )}
-    {openModal && (
-      <AddUpdateOffice
-        // id={officeId}
-        openModal={openModal}
-        companyId={id}
-        setOpenModal={setOpenModal}
-        fetchAllData={() => {
-          fetchAllOffice(id,queryString);
+      <Table
+        headerData={columnData}
+        bodyData={officeDataPage.data}
+        isButton={true}
+        buttonText="Add Office"
+        buttonClick={() => {
+          setOfficeId("");
+          setOpenModal(true);
         }}
+        loader={loader}
+        pagination={true}
+        dataPerPage={limit}
+        setLimit={setLimit}
+        currentPage={currentPage}
+        totalPage={officeDataPage.totalPage}
+        setSorting={setSorting}
+        sortType={sortType}
+        setSortingType={setSortingType}
       />
-    )}
-  </>
+      {open && (
+        <Modal
+          variant={"Confirmation"}
+          closeModal={() => setOpen(!open)}
+          width="max-w-[475px]"
+          icon={<DeleteIcon className="w-full h-full mx-auto" />}
+          okbtnText="Yes"
+          cancelbtnText="No"
+          onClickHandler={() => officeDelete(officeId)}
+          confirmationText="Are you sure you want to delete this Company?"
+          title="Delete"
+        >
+          <div className=""></div>
+        </Modal>
+      )}
+      {openModal && (
+        <AddUpdateOffice
+          // id={officeId}
+          openModal={openModal}
+          companyId={id}
+          setOpenModal={setOpenModal}
+          fetchAllData={() => {
+            fetchAllOffice(id, queryString);
+          }}
+        />
+      )}
+    </>
   );
 };
 
 export default OfficeList;
-

@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AddUpdateRole from "./AddUpdateRole";
 import { setCompanyData } from "@/redux/slices/companySlice";
 import { useNavigate } from "react-router-dom";
+import { FormatDate } from "@/helpers/Utils";
 
 const RoleList = () => {
   const [limit, setLimit] = useState<number>(10);
@@ -117,6 +118,9 @@ const RoleList = () => {
       name: "createdAt",
       className: "",
       commonClass: "",
+      cell: (props: any) => {
+        return FormatDate(props.createdAt);
+      },
     },
     {
       header: "isActive",

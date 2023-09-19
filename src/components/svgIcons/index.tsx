@@ -394,25 +394,24 @@ export const CroosIcon = ({ className }: IIconInputProps) => {
   );
 };
 
-export const ApprovedIcon=({ className }: IIconInputProps)=>{
-  return(
+export const ApprovedIcon = ({ className }: IIconInputProps) => {
+  return (
     <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth="3.5"
-    stroke="currentColor"
-    className={`fill-current ${className ? className : ""}`}
-    
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M4.5 12.75l6 6 9-13.5"
-    />
-  </svg>
-  )
-}
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="3.5"
+      stroke="currentColor"
+      className={`fill-current ${className ? className : ""}`}
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M4.5 12.75l6 6 9-13.5"
+      />
+    </svg>
+  );
+};
 
 export const ArrowSortUpIcon = ({ className }: IIconInputProps) => {
   return (
@@ -1066,5 +1065,22 @@ export const CrossIcon2 = ({ className }: IIconInputProps) => {
         />
       </svg>
     </>
+  );
+};
+
+export const EditIcon = ({ className, onclick }: IIconInputProps) => {
+  return (
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 19 19"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      onClick={onclick}
+      className={`fill-current ${className ? className : ""}`}
+    >
+      <path d="M11.9992 18.8002H2.99922C1.49922 18.8002 0.199219 17.6002 0.199219 16.0002V7.0002C0.199219 5.5002 1.39922 4.2002 2.99922 4.2002H5.99922C6.39922 4.2002 6.79922 4.5002 6.79922 5.0002C6.79922 5.5002 6.39922 5.8002 5.99922 5.8002H2.99922C2.29922 5.8002 1.79922 6.3002 1.79922 7.0002V16.0002C1.79922 16.7002 2.39922 17.3002 3.09922 17.3002H12.0992C12.7992 17.3002 13.3992 16.7002 13.3992 16.0002V13.0002C13.3992 12.6002 13.6992 12.2002 14.1992 12.2002C14.6992 12.2002 14.9992 12.5002 14.9992 13.0002V16.0002C14.7992 17.5002 13.4992 18.8002 11.9992 18.8002Z" />
+      <path d="M17.9988 0.999805C16.9988 -0.100195 14.9988 -0.100195 13.9988 0.999805L5.49883 9.4998C5.39883 9.5998 5.29883 9.7998 5.29883 9.9998V12.9998C5.29883 13.3998 5.59883 13.7998 6.09883 13.7998H9.09883C9.29883 13.7998 9.49883 13.6998 9.59883 13.5998L17.9988 4.9998C19.1988 3.8998 19.1988 2.0998 17.9988 0.999805ZM8.69883 12.2998H6.79883V10.3998L12.9988 4.0998L14.8988 5.9998L8.69883 12.2998ZM16.9988 3.9998L15.9988 4.9998L14.0988 2.9998L15.0988 1.9998C15.5988 1.4998 16.4988 1.4998 16.9988 1.9998C17.4988 2.5998 17.4988 3.3998 16.9988 3.9998Z" />
+    </svg>
   );
 };

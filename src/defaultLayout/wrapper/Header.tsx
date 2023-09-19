@@ -56,7 +56,10 @@ const Header = () => {
               <div className="bg-white rounded-10 shadow-menu absolute top-[calc(100%_+_15px)] min-w-[200px] right-0 transition-all duration-500 opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100 pointer-events-none group-hover:pointer-events-auto z-2">
                 <span className="absolute -top-2 right-5 border-r-[8px] border-b-[8px] border-l-[8px] border-transparent border-b-white"></span>
                 <ul className="py-2">
-                  <li className="flex items-center relative px-5 cursor-pointer hover:bg-gray-100 before:absolute before:content-[''] before:w-10/12 before:left-0 before:right-0 before:mx-auto before:h-px before:bg-gray-200 before:top-full last:before:hidden">
+                  <li
+                    className="flex items-center relative px-5 cursor-pointer hover:bg-gray-100 before:absolute before:content-[''] before:w-10/12 before:left-0 before:right-0 before:mx-auto before:h-px before:bg-gray-200 before:top-full last:before:hidden"
+                    onClick={() => navigate("/admin/account/")}
+                  >
                     <span className="w-5 h-5 text-themeColor mr-3">
                       <SingleUserIocn className="w-full h-full" />
                     </span>

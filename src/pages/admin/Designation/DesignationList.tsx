@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import AddUpdateDesignation from "./AddUpdateDesignation";
 import { setDesignationData } from "@/redux/slices/designationSlide";
 import { useNavigate } from "react-router-dom";
+import { FormatDate } from "@/helpers/Utils";
 
 const DesignationList = () => {
   const [limit, setLimit] = useState<number>(10);
@@ -117,6 +118,9 @@ const DesignationList = () => {
       name: "createdAt",
       className: "",
       commonClass: "",
+      cell: (props: any) => {
+        return FormatDate(props.createdAt);
+      },
     },
     // {
     //   header: "Action",

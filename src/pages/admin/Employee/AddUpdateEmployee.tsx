@@ -9,7 +9,7 @@ import { Form, Formik, FormikValues } from "formik";
 import DateComponent from "@/components/formComponents/dateComponent/DateComponent";
 // import Textarea from "@/components/formComponents/textarea/Textarea";
 // import { ICompanyData } from "@/interface/Company/CompanyInterface";
-import { RoundUserIcon } from "@/components/svgIcons";
+import { IconEye, IconEyeSlash, RoundUserIcon } from "@/components/svgIcons";
 
 import {
   // AddCompanyData,
@@ -70,6 +70,9 @@ const AddUpdateEmployee = ({
   const [officeAddressOptions, setOfficeAddressOptions] = useState<any[]>([]);
   const [loader, setLoader] = useState<boolean>(false);
   const [profileImage, setProfileImage] = useState("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
 
   const OnSubmit = async (values: FormikValues) => {
     setLoader(true);
@@ -97,6 +100,7 @@ const AddUpdateEmployee = ({
         fetchAllData?.();
       }
     } else {
+      formData.append("password", values.password);
       formData.append("isActive", "false");
       const response = await RegisterUser(formData);
       if (response?.data?.response_type === "SUCCESS") {
@@ -439,6 +443,50 @@ const AddUpdateEmployee = ({
                       </div>
                     </>
                   </Card>
+                  {!id && (
+                    <Card title="Password" parentClass="mb-5 last:mb-0">
+                      <>
+                        <TextField
+                          type={showPassword ? "text" : "password"}
+                          label="New Password"
+                          name="password"
+                          parentClass={"col-span-1"}
+                          isCompulsory={true}
+                          placeholder="New Password"
+                          icon={
+                            <div
+                              onClick={() => setShowPassword(!showPassword)}
+                              className="absolute right-4 top-10 rtl:left-4 rtl:right-auto cursor-pointer"
+                            >
+                              {showPassword ? <IconEye /> : <IconEyeSlash />}
+                            </div>
+                          }
+                        />
+                        <TextField
+                          type={showConfirmPassword ? "text" : "password"}
+                          label="Confirm Password"
+                          name="confirmPassword"
+                          parentClass={"col-span-1"}
+                          isCompulsory={true}
+                          placeholder="Confirm Password"
+                          icon={
+                            <div
+                              onClick={() =>
+                                setShowConfirmPassword(!showConfirmPassword)
+                              }
+                              className="absolute right-4 top-10 rtl:left-4 rtl:right-auto cursor-pointer"
+                            >
+                              {showConfirmPassword ? (
+                                <IconEye />
+                              ) : (
+                                <IconEyeSlash />
+                              )}
+                            </div>
+                          }
+                        />
+                      </>
+                    </Card>
+                  )}
 
                   <div className={`flex gap-4 justify-start p-1`}>
                     <Button type="submit" variant={"primary"} loader={loader}>

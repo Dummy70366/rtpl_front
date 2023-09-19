@@ -29,7 +29,8 @@
       "@redux/*": ["redux/*"],
       "@router/*": ["router/*"],
       "@components/*": ["components/*"],
-      "@validations/*": ["validations/*"]
+      "@validations/*": ["validations/*"],
+      "@helpers/*": ["helpers/*"]
     },
   },
   "include": ["src"],
