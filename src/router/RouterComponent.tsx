@@ -15,6 +15,7 @@ const RouterComponent = () => {
   const [temp, setTemp] = useState(false);
 
   useEffect(() => {
+
     setTemp(!temp);
     !token &&
       !AuthRoutes.find((val) => val.path === pathname) &&
@@ -29,7 +30,6 @@ const RouterComponent = () => {
           <Route key={id} path={route.path} element={<route.element />} />
         ))}
       </Route>
-
       <Route path="/" element={<AuthLayOut />}>
         {!token &&
           AuthRoutes.map((route, id) => (

@@ -7,11 +7,11 @@ import { ArrowSortUpIcon, CloudDownIocn, PlusIcon } from "../svgIcons";
 import Tab from "../tab/Tab";
 import { Link } from "react-router-dom";
 import DateRange from "../formComponents/dateRange/DateRange";
-import ClientDropdown from "../dropdown/ClientDropdown";
+// import ClientDropdown from "../dropdown/ClientDropdown";
 import { Option } from "@/interface/customSelect/customSelect";
-import SegmentDropdown from "../dropdown/SegmentDropdown";
+// import SegmentDropdown from "../dropdown/SegmentDropdown";
 import { ITableProps } from "@/interface/table/tableInterface";
-import EmployeeDropdown from "../dropdown/EmployeeDropdown";
+// import EmployeeDropdown from "../dropdown/EmployeeDropdown";
 import { setActiveTab } from "@/redux/slices/adminSidebarSlice";
 import { useDispatch } from "react-redux";
 import { VITE_APP_API_URL } from "@/config";
@@ -38,10 +38,10 @@ const Table = ({
   pagination,
   currentPage,
   setLimit,
-  isClientDropdown = false,
-  isSegmentDropdown = false,
-  isEmployeeDropdown = false,
-  isEmployeeMedicalStatus = false,
+  // isClientDropdown = false,
+  // isSegmentDropdown = false,
+  // isEmployeeDropdown = false,
+  // isEmployeeMedicalStatus = false,
   setSorting,
   sortType,
   setSortingType,
@@ -94,11 +94,11 @@ const Table = ({
                 parentClass="1300:w-[200px] 1400:w-[270px] 1700:w-[340px]"
               />
             )}
-            {isClientDropdown && <ClientDropdown />}
-            {isSegmentDropdown && <SegmentDropdown />}
-            {isEmployeeDropdown && (
+            {/* {isClientDropdown && <ClientDropdown />} */}
+            {/* {isSegmentDropdown && <SegmentDropdown />} */}
+            {/* {isEmployeeDropdown && (
               <EmployeeDropdown isShowMedicalStatus={isEmployeeMedicalStatus} />
-            )}
+            )} */}
             {isTab && <Tab setTab={setTab} />}
             {isDateRange && (
               <DateRange

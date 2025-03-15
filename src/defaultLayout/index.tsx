@@ -12,7 +12,7 @@ const LayOut: React.FC = () => {
       <div className={`flex p-4 bg-offWhite h-dvh overflow-auto max-w-[2000px] mx-auto`}>
         <LeftSideBar />
         <div className={` px-30px w-full h-fit transition-all duration-300 ${AdminSideBarVar ? ' max-w-[calc(100%_-_250px)] ' : 'max-w-[calc(100%_-_80px)]'}`}>
-          <div className="main-wrapper test">
+          <div className="main-wrapper">
             <Header />
             <div className="site-content">
               <Outlet />

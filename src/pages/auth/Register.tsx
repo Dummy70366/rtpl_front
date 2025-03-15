@@ -12,11 +12,11 @@ import { RegisterUser } from "@/services/authService";
 import { RegisterValidationSchema } from "@/validations/auth/RegisterValidation";
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { GetRolesListData } from "@/services/RoleService";
+import { Link } from "react-router-dom";
+import { GetRolesListData } from "@/services/roleService";
 
 const Register = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [companyOptions, setCompanyOptions] = useState<Option[]>([]);
@@ -58,17 +58,20 @@ const Register = () => {
   async function getCompanyList() {
     const response = await GetCompanyListData();
     if (response?.data.response_type === "SUCCESS") {
-      const temp = response?.data.data.map((value: any) => ({
+      console.log(response?.data.data.data);
+      const temp = response?.data.data.data.map((value: any) => ({
         label: value.Name,
         value: value.companyID,
       }));
+      console.log(temp);
       setCompanyOptions(temp);
     }
   }
   async function getRolesList() {
     const response = await GetRolesListData();
+
     if (response?.data.response_type === "SUCCESS") {
-      const temp = response?.data.data.map((value: any) => ({
+      const temp = response?.data.data.data.map((value: any) => ({
         label: value.role,
         value: value.roleID,
       }));
@@ -80,7 +83,7 @@ const Register = () => {
     if (id) {
       const response = await GetAllOfficesById(Number(id));
       if (response?.data.response_type === "SUCCESS") {
-        const temp = response?.data.data.map((value: any) => ({
+        const temp = response?.data.data.data.map((value: any) => ({
           label: value.Address,
           value: value.officeID,
         }));

@@ -1,7 +1,7 @@
-import {
-  IRolePermissionData,
-  IUserPermissionData,
-} from "../rolePermission/RolePermissionInterface";
+// import {
+//   IRolePermissionData,
+//   IUserPermissionData,
+// } from "../rolePermission/RolePermissionInterface";
 
 export interface User {
   id: number;
@@ -36,10 +36,11 @@ export interface IUserData {
   verified: boolean;
   profileImage: null | string;
   createdAt: string;
-  roleData: {
-    name: string;
-    assignedPermissions: IRolePermissionData[];
-  };
-  userAssignedPermissions: IUserPermissionData[];
+  // roleData: {
+  //   name: string;
+  //   assignedPermissions: IRolePermissionData[];
+  // };
+  // userAssignedPermissions: IUserPermissionData[];
   featurePermissions?: { featureName: string; permissions: [] }[];
 }
+

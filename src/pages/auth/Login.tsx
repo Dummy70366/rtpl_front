@@ -30,7 +30,7 @@ const Login = () => {
     if (response_type === "SUCCESS") {
       if (data) {
         dispatch(setToken(data?.access_token));
-        dispatch(setUser(data.user));
+        dispatch(setUser(data.data));
         navigate("/");
       }
     }

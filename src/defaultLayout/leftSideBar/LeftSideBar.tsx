@@ -48,7 +48,7 @@ const AdminSideBar = () => {
           >
             <img
               src={`/assets/images/${
-                AdminSideBarVar ? "lred-main-logo.png" : "favicon.ico"
+                AdminSideBarVar ? "riseglow-removebg-preview.png" : "favicon.ico"
               }`}
               width={127.85}
               height={45.87}

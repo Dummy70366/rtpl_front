@@ -14,9 +14,12 @@ import { removeToken, setUser } from "@/redux/slices/userSlice";
 const setupAxios = (store: Store) => {
   axios.interceptors.request.use((request: InternalAxiosRequestConfig) => {
     const storeData = store.getState();
-
+    // console.log();
+    // // const openRoutes = [
+    // //   ""
+    // // ]
     const authToken = storeData.user.token;
-    if (authToken) {
+    if (authToken && !request.url?.includes('api/company/getCompanyList')) {
       (
         request.headers as AxiosRequestHeaders
       ).Authorization = `jwt ${authToken}`;
@@ -71,6 +74,7 @@ export function axiosGet<T>(url: string, data: T | null = null) {
   return axios.get(`${VITE_APP_API_URL}${url}`, {
     params: data,
   });
+
 }
 
 export function axiosPost<T>(
